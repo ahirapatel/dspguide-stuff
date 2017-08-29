@@ -22,7 +22,7 @@ each bin requires two bytes?
 				(1 subtraction * 1 microsecond) + (1 division * 3 microseconds) +
 				(1 sqrt * 10 microseconds) = 
 					600,017 microseconds
-## 2b. running mean: (100,000 additions of samples * 1 microsecond) + 
+## 1b. running mean: (100,000 additions of samples * 1 microsecond) + 
 						(100,000 additions of samples * 1 microsecond) + 
 						(100,000 squares * 3 microseconds) + 
 						(100,000 additions of samples * 1 microsecond) + 
@@ -32,7 +32,24 @@ each bin requires two bytes?
 						(1 sqrt * 10 microseconds) = 
 							600,024 microseconds
 
-## 2c. histo mean:
+## 1c. histo mean: (100,000 additions * 1 microsecond) + 
+					(1024 multiplications * 3 microseconds) + (1024 additions * 1 microsecond) + 
+					(1 division * 3 microseconds) + 
+					(1024 subtractions * 1 microsecond) + (1024 multiplications * 3 microseconds) + 
+						(1024 multiplications * 3 microseconds) + (1024 adds * 1 microseconds) +
+					(1 subtraction * 1 microsecond) + (1 division * 3 microseconds) + 
+					(1 sqrt * 10 microseconds) = 
+						112,305 microseconds
+
+## 1d. histo mean: (100,000 additions * 1 microsecond) + 
+					(1024 multiplications * 3 microseconds) + (1024 additions * 1 microsecond) + 
+					(1 division * 3 microseconds) + 
+					(1024 subtractions * 1 microsecond) + (1024 multiplications * 3 microseconds) + 
+						(1024 multiplications * 3 microseconds) + (1024 adds * 1 microseconds) +
+					(1 subtraction * 1 microsecond) + (1 division * 3 microseconds) + 
+					(1 sqrt * 10 microseconds) = 
+						112,305 microseconds
+		memory: 2^32 possible values * 2 bytes = 8589934592
 
 2.  You are asked to evaluate a new device for detecting cancer in humans. 
 When a healthy person is tested, the device produces a number that follows a
@@ -44,24 +61,39 @@ make the diagnosis: if the reading is < 110, the person is classified as
 healthy; if the reading is > 110, the person is considered to have cancer.
 
 a. Sketch the two pdfs, and indicate on your sketch the location of the
-threshold.  
+threshold.
+--> Two gaussian curves, centered peak is on mean.
+
 b. For the healthy distribution, how many standard deviations above the mean
-is the threshold?
+is the threshold? 
+--> 1 standard deviation
+
 c. For the sick distribution, how many standard deviations below the mean is
 the threshold?
+--> 1.25 standard deviation
+
 d. If a healthy person is tested with the system, what is the probability
 that the reading produced will be less than 110? Greater than 110?
+--> 84.13%, 15.87%
+
 e. If a sick person is tested with the system, what is the probability that
 the reading produced will be less than 110? Greater than 110?
+--> (.1151+.0968) / 2, 1 - ((.1151+.0968) / 2)
+
 f. What percentage of sick patients are incorrectly classified as healthy?  
+--> (.1151+.0968) / 2
+
 g. What percentage of healthy patients are incorrectly classified as sick.
+--> 84.13%
 
 
 3. Using the same cancer detection system as in problem 2, where should the
 threshold be set to insure that 99% of all sick persons being examined are
 reported as sick? At this threshold, what fraction of healthy persons are
 incorrectly reported as being sick?  
-
+--> 2.3 standard deviations from the mean (2.3*8 + 120) = 138.4
+--> (138.4 - 110) / 10 = 2.84 standard deviations above from mean, so ~99% of
+    healthy dudes will be incorrectly classified as cancerous
 
 4. Twelve financial experts are asked to predict the stock market price 30
 days in advance.  The values they provide are: 996, 868, 855, 956, 867, 933,
@@ -69,8 +101,11 @@ days in advance.  The values they provide are: 996, 868, 855, 956, 867, 933,
 found to be 876. 
 
 a.  What is the mean of the predictions?
+--> [996, 868, 855, 956, 867, 933, 866, 887, 936, 901, 818, 956] / NUM = 903.25
 b.  What is the standard deviation of the predictions?
+--> 52.166
 c.  What is the accuracy of the experts' prediction?  
+--> 903.25 - 876 = 27.25
 d.  What is the precision of an experts' prediction?  
 
 
