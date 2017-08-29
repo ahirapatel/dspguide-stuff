@@ -1,0 +1,111 @@
+1. A signal contains 100,000 samples, and each sample is  represented by 10
+bits.  Assume that addition and subtraction require 1 microsecond,
+multiplication and division require 3 microseconds, the square-root requires
+10 microseconds, and other programming actions (such as array indexing and
+loop control) are negligible.  Find the time required to calculate the mean
+and standard deviation of the signal using:  
+
+a. The direct method, as shown in Table 2-1.
+b. Running statistics, as shown in Table 2-2.  
+(You will need to modify the program in Table 2-2 to calculate the mean and
+standard deviation only of the entire signal, not after each point.  That
+is, move the NEXT I% in line 320 to line 250).
+c. The histogram method, as shown in Table 2-3.
+d. Repeat (c) for the case that each sample is represented by 32 bits.  How
+much memory is required to hold the histogram for this calculation, assuming
+each bin requires two bytes?
+
+## 1a. mean: (100,000 additions of samples * 1 microsecond) + (1 division * 3 microseconds) = 
+				100,003 microseconds
+       std: meancalculationtime + (100,000 additions of samples * 1 microsecond) + 
+				(100,000 subtractions * 1 microsecond) + (100,000 squares * 3 microseconds)
+				(1 subtraction * 1 microsecond) + (1 division * 3 microseconds) +
+				(1 sqrt * 10 microseconds) = 
+					600,017 microseconds
+## 2b. running mean: (100,000 additions of samples * 1 microsecond) + 
+						(100,000 additions of samples * 1 microsecond) + 
+						(100,000 squares * 3 microseconds) + 
+						(100,000 additions of samples * 1 microsecond) + 
+						(1 division * 3 microseconds) + 
+						(1 division * 3 microseconds) + (1 square * 3 microseconds) + (1 subtraction * 1 microsecond) +
+						(1 subtraction * 1 microsecond) + (1 division * 3 microseconds)
+						(1 sqrt * 10 microseconds) = 
+							600,024 microseconds
+
+## 2c. histo mean:
+
+2.  You are asked to evaluate a new device for detecting cancer in humans. 
+When a healthy person is tested, the device produces a number that follows a
+normal distribution with a mean of 100 and a standard deviation of 10. When
+a person with cancer is examined, the resulting number is normally
+distributed with a mean of 120 and a standard deviation of 8. When the
+device is used on a person of unknown health, a threshold of 110 is used to
+make the diagnosis: if the reading is < 110, the person is classified as
+healthy; if the reading is > 110, the person is considered to have cancer.
+
+a. Sketch the two pdfs, and indicate on your sketch the location of the
+threshold.  
+b. For the healthy distribution, how many standard deviations above the mean
+is the threshold?
+c. For the sick distribution, how many standard deviations below the mean is
+the threshold?
+d. If a healthy person is tested with the system, what is the probability
+that the reading produced will be less than 110? Greater than 110?
+e. If a sick person is tested with the system, what is the probability that
+the reading produced will be less than 110? Greater than 110?
+f. What percentage of sick patients are incorrectly classified as healthy?  
+g. What percentage of healthy patients are incorrectly classified as sick.
+
+
+3. Using the same cancer detection system as in problem 2, where should the
+threshold be set to insure that 99% of all sick persons being examined are
+reported as sick? At this threshold, what fraction of healthy persons are
+incorrectly reported as being sick?  
+
+
+4. Twelve financial experts are asked to predict the stock market price 30
+days in advance.  The values they provide are: 996, 868, 855, 956, 867, 933,
+866, 887, 936, 901, 818, 956. In 30 days, the true stock market price is
+found to be 876. 
+
+a.  What is the mean of the predictions?
+b.  What is the standard deviation of the predictions?
+c.  What is the accuracy of the experts' prediction?  
+d.  What is the precision of an experts' prediction?  
+
+
+5. An astronomer measures the brightness of a star on 30 consecutive nights. 
+Due to atmospheric turbulence and other random errors, the measurements have
+a coefficient-of-variation of 3.0%. One of the measurements is found to be
+6.9% higher than the average.   
+
+a. What is the signal-to-noise ratio of the 30 sample signal? 
+b. What is the probability that any one measurement will be at least 6.9%
+higher than the mean from random error?
+c. Can the astronomer conclude that the 6.9% reading is a result of the star
+changing in brightness? Explain.  
+d. Repeat (b) and (c) for the high measurement being 10.2% above the mean.  
+
+
+6. When two or more random signals are added, the resulting signal has a
+mean equal to the sum of the means of the component signals.  Likewise, the
+variance of the resulting signal is equal to the sum of the variances of the
+component signals.  Derive an equation showing how the standard deviation of
+the resulting signal is related to the standard deviations of the component
+signals. (This is often called "adding in quadrature").
+
+
+7. Find the mean and SD of the signal that results from adding the random
+signals indicated.   
+
+a. 1 volt mean, 20 mV SD; 1 volt mean, 20 mV SD.
+b. 1 volt mean, 20 mV SD; 1 volt mean, 2 mV SD.
+c. 1 volt mean, 20 mV SD; 1 volt mean, 0.2 mV SD.
+d. 3 volt mean, 10 mV SD; 5 volt mean, 15 mV SD.
+e. 10 volt mean, 10 mV SD; 5 volt mean, 15 mV SD; 0.2 Volt mean, 100 mV SD. 
+
+
+8. Electronic systems contain many noise sources; however, the total noise
+of a system is usually dominated by only one of these noise sources.  Based
+on your answers in the last two problems, explain why this is so.   
+
