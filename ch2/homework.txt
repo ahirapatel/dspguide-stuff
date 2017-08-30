@@ -107,16 +107,27 @@ b.  What is the standard deviation of the predictions?
 c.  What is the accuracy of the experts' prediction?  
 --> 903.25 - 876 = 27.25
 d.  What is the precision of an experts' prediction?  
+--> 52.166
 
 
 5. An astronomer measures the brightness of a star on 30 consecutive nights. 
 Due to atmospheric turbulence and other random errors, the measurements have
 a coefficient-of-variation of 3.0%. One of the measurements is found to be
 6.9% higher than the average.   
+-->CV = std / mean * 100
+-->SNR = mean / std
 
-a. What is the signal-to-noise ratio of the 30 sample signal? 
+a. What is the signal-to-noise ratio of the 30 sample signal?
+-->3.0 = std / mean * 100
+-->.03 = std / mean
+-->.03 ^ -1 = mean / std
+-->33.333 = mean / std
+-->SNR = 33.33
+
 b. What is the probability that any one measurement will be at least 6.9%
 higher than the mean from random error?
+--> I have no idea
+--> 1/30 = .0333333
 c. Can the astronomer conclude that the 6.9% reading is a result of the star
 changing in brightness? Explain.  
 d. Repeat (b) and (c) for the high measurement being 10.2% above the mean.  
@@ -128,19 +139,30 @@ variance of the resulting signal is equal to the sum of the variances of the
 component signals.  Derive an equation showing how the standard deviation of
 the resulting signal is related to the standard deviations of the component
 signals. (This is often called "adding in quadrature").
-
+--> Add two siggies then variance can be expressed as v1+v2
+--> variance = v1+v2
+--> variance = standard_deviation^2
+---> standard_deviation^2 = v1+v2
+---> standard_deviation = sqrt(v1+v2)
 
 7. Find the mean and SD of the signal that results from adding the random
 signals indicated.   
 
 a. 1 volt mean, 20 mV SD; 1 volt mean, 20 mV SD.
+--> 2 volt mean, sqrt(20^2 + 20^2) mV SD
+---> 2 volt mean, 28.284 mV SD
 b. 1 volt mean, 20 mV SD; 1 volt mean, 2 mV SD.
+--> 2 volt mean, 20.100 mV SD
 c. 1 volt mean, 20 mV SD; 1 volt mean, 0.2 mV SD.
+--> 2 volt mean, 20.001 mV SD
 d. 3 volt mean, 10 mV SD; 5 volt mean, 15 mV SD.
+--> 8 volt mean, 18.028 mV SD
 e. 10 volt mean, 10 mV SD; 5 volt mean, 15 mV SD; 0.2 Volt mean, 100 mV SD. 
-
+--> 15 volt mean, 18.028 mV SD, Look this is one random signal now so we just merge it with #3 there right?
+---> 15.2 volt mean, 101.612 mv SD
 
 8. Electronic systems contain many noise sources; however, the total noise
 of a system is usually dominated by only one of these noise sources.  Based
 on your answers in the last two problems, explain why this is so.   
-
+--> variance is additive for combining signals, so larger one will cause largest change in variance.
+--> Okay, I am bad at english.
