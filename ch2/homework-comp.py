@@ -1,5 +1,5 @@
 import matplotlib.pyplot
-from numpy import histogram
+from numpy import histogram, std, var
 from random import random 
 
 """
@@ -38,15 +38,15 @@ algorithm.  Use a bin width of 0.01.
 """
 def histo_n(n):
     # Numpy. Yes.
-    one_thou = []
+    data = []
     for x in range(n):
-        one_thou.append(the_algorithm())
+        data.append(the_algorithm())
     # Range of values is -.2 to 1.0, with a width of 0.01, so use 120 bins
-    freq, buckets = histogram(one_thou, bins=120)
+    freq, buckets = histogram(data, bins=120)
 
     #print(freq, buckets)
     # Uh, apparently I don't need histogram from numpy... oh well
-    matplotlib.pyplot.hist(list(one_thou), bins=buckets)
+    matplotlib.pyplot.hist(data, bins=buckets)
     matplotlib.pyplot.show()
 
     return freq,buckets
@@ -82,34 +82,112 @@ worst estimate?
 h. Which histogram has the lowest peak-to-peak noise?  The highest peak-to-
 peak noise?  
 """
+print("lowest peak-to-peak is 1000 samples, highest peak-to-peak is 100,000 samples")
 
 """
 i. Explain the apparent contradiction between your answers in (g) and (h).   
+"""
+print("more samples in one, you gotta normalize them")
 
- 
+"""
 2. Calculation of the mean and standard deviation.
 
 a. Generate a signal containing 10,000 points from this algorithm. Calculate
 the mean and standard deviation, using a method of your choice.       
+"""
+tenK = []
+for x in range(10000):
+    tenK.append(the_algorithm())
+print("Name,\tSTD,\t\tVAR,\t\tMEAN")
+print("1", std(tenK), var(tenK), sum(tenK)/len(tenK))
+
+"""
 b. Generate three signals as in (a), and add them together.  Calculate the 
 mean and standard deviation of the resulting signal.
+"""
+tenK2 = []
+for x in range(10000):
+    tenK2.append(the_algorithm())
+tenK3 = []
+for x in range(10000):
+    tenK3.append(the_algorithm())
+print("2", std(tenK2), var(tenK2), sum(tenK2)/len(tenK2))
+print("3", std(tenK3), var(tenK3), sum(tenK3)/len(tenK3))
+sumK = []
+for a,b,c in zip(tenK, tenK2, tenK3):
+    sumK.append(a+b+c)
+print("sumsX3", std(sumK), var(sumK), sum(sumK)/len(sumK))
+
+"""
 c. Repeat (b) adding 10 signals. 
+"""
+
+ten_siggies = []
+for x in range(10000):
+    ten_samples = []
+    for i in range(10):
+        ten_samples.append(the_algorithm())
+    ten_siggies.append(ten_samples)
+
+sum10 = []
+for vals in ten_siggies:
+    sum10.append(sum(vals)) # Sum up values at t=<blah> then stick em in sum10 at t=<blah>
+print("sumsX10", std(sum10), var(sum10), sum(sum10)/len(sum10))
+
+"""
 d. Repeat (b) adding 30 signals.  
+"""
+thirty_siggies = []
+for x in range(10000):
+    thirty_samples = []
+    for i in range(30):
+        thirty_samples.append(the_algorithm())
+    thirty_siggies.append(thirty_samples)
+
+sum30 = []
+for vals in thirty_siggies:
+    sum30.append(sum(vals)) # Sum up values at t=<blah> then stick em in sumK at t=<blah>
+print("sumsX30", std(sum30), var(sum30), sum(sum30)/len(sum30))
+
+"""
 e. Make a graph of your data in (a)-(d), proving that when random signals
 are added, their means add and their standard deviations add in quadrature.
 In your graphs, the x-axis should be "number of points," and the y-axis
 should be "mean" or "standard deviation."
-
-
-3. The Central Limit Theorem.
-  
-a. Calculate and plot the histogram of the signal in 2(c).   
-b. On this same graph, show a Gaussian curve with the mean and standard 
-deviation determined in 2(c).  
-c. Comment on the match between the two in terms of accuracy and precision.  
-d. Would increasing the number of samples improve the accuracy or precision 
-of the match?  
-e. Would increasing the number of signals added improve the accuracy of the 
-match? 
+"""
+# No. Instead just look at print statements, doing the math in your head is easy enough.
 
 """
+3. The Central Limit Theorem.
+
+a. Calculate and plot the histogram of the signal in 2(c).   
+""" 
+matplotlib.pyplot.hist(sum10, bins=25)
+matplotlib.pyplot.show()
+
+"""
+b. On this same graph, show a Gaussian curve with the mean and standard 
+deviation determined in 2(c).  
+"""
+# Eh, you can kind of just look at it to see the shape.
+
+"""
+c. Comment on the match between the two in terms of accuracy and precision.  
+"""
+# Could be more accurate as it is not very rounded like a gaussian, but more signals
+# added to it would make it more gaussian.
+
+"""
+d. Would increasing the number of samples improve the accuracy or precision 
+of the match?  
+"""
+# More precise, standard deviation will be lower.
+# The accuracy would also go up for non-random signals, as we'd be closer to the
+# "true value"
+
+"""
+e. Would increasing the number of signals added improve the accuracy of the 
+match? 
+"""
+# Yes, as more signals are added, it would become more and more bell shaped in
+# the distribution
