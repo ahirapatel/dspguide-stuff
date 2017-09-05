@@ -1,0 +1,156 @@
+CHAPTER 3: ADC AND DAC
+
+1. Specify how many bits are needed to appropriately digitize each of the 
+following signals.  Choose from: 6 bits, 8 bits, 10 bits, 12 bits, 14 bits, 
+or 16 bits. 
+
+a. A signal where the maximum amplitude is 1 volt and the rms noise is 1.5
+millivolts.  
+b. A signal with a signal-to-noise ratio of 900 to 1. 
+c. A signal with a coefficient-of-variation of 0.4%. 
+d. A high-fidelity audio system (hint: a jack-hammer is about 50,000 times
+louder than a pin drop). 
+e. A black and white digital image (hint: under the best conditions, the 
+human eye can differentiate about 200 shades of gray between pure black and 
+pure white). 
+
+
+2. A scientist evaluates two different digital thermometers.  Each has a 
+digital read-out to the nearest one degree, and updates once each second.  
+When the temperature is held constant, the digital display of thermometer A
+does not change, but the display of thermometer B randomly toggles between
+three to four adjacent readings (i.e., +/- 2 degrees).  For the questions 
+below, assume that the temperature is held constant.  
+
+a. What is the largest possible error in an individual reading from A? 
+b. What is the largest possible error in an individual reading from B?
+c. In a single reading, which provides the "best" information?  Explain.   
+d. If 1000 readings are taken with A, what is the standard deviation? 
+e. If 1000 readings are taken with B, what is the approximate standard
+deviation? (choose from 0.1, 0.5, 2.0 and 4.0).  
+f. If 1000 readings are taken with thermometer B, what is the "typical error
+between the mean of the readings, and the mean of the underlying process?  
+g. If 1000 readings are taken with each thermometer, which data set provides
+the "best" information? Explain.  
+h. How many readings must be taken with thermometer A to reliably detect a
+temperature change of 0.15 degrees?  (choose from 10, 100, 1000, 1 million,
+1 billion, or "it cannot be done").  Explain.  
+i. Repeat (h) for thermometer B.  
+
+
+3. An engineer designs a microprocessor controlled ADC board that can 
+acquire an 8 bit sample every 10 microseconds.  His boss walks in and says:
+"You'll get a raise if the system can be modified to acquire a 12 bit sample
+every 100 milliseconds- but it needs to be done by tomorrow!"  The first
+thing the engineer does is to measure the noise on the analog signal
+entering the ADC chip. He then smiles, and plans how to spend the extra
+money. In detail, explain what the engineer was looking for in the noise
+measurement, and how he can make the modification.  
+
+
+4. An analog electronic signal is composed of three sine waves: 1 kHz @ 1 
+volt amplitude, 3 kHz @ 2 volts amplitude, and 4 kHz @ 5 volts amplitude
+(all voltage readings are peak-to-peak).  The signal is digitized with 12
+bits, spread over the range of -5 volts to +5 volts.  For each sampling rate
+below, describe the frequency components that exist in the digital signal.
+Be sure to specify three things for each component: its digital frequency (a
+number between 0 and 0.5), its amplitude (in digital numbers, peak-to-peak),
+and its phase relative to the original analog signal (either 0 degrees or
+180 degrees).  
+
+a. Sampling rate = 100 kHz. 
+b. Sampling rate = 10 kHz.
+c. Sampling rate = 7.5 kHz.
+d. Sampling rate = 5.5 kHz.
+e. Sampling rate = 5 kHz.
+f. Sampling rate = 1.7 kHz.
+
+
+5. A high-fidelity audio signal (containing frequencies between 20 Hz and 20
+kHz) is contaminated with interference from a nearby switching power supply,
+operating at 32 kHz.  To eliminate the interference, the analog signal is
+passed through an 8 pole Butterworth filter with a cutoff frequency of 24
+kHz. The filtered signal is then digitized at 44 kHz.  
+
+a. Sketch and label the frequency spectrum of the analog signal, showing: 
+the audio frequency band, the interfering signal, the frequency response of
+the filter, one-half the sampling frequency, and the sampling frequency.   
+
+# See poorly drawn diagram on paper.
+
+b. What is the approximate attenuation of the filter at the frequency of the
+interference?  
+
+# See paper
+
+c. What is the effect of the filter on the audio information?   
+d. Sketch and label the frequency spectrum of the digital signal, showing: 
+the audio frequency band, and the interfering signal.  
+e. At what frequency does the aliased interference appear in the digitized 
+signal?  
+f. If an 8 pole Chebyshev filter (6% ripple) were used instead, how would
+the amplitude of the aliased interference change?  
+g. Repeat (a)-(f) with the cutoff frequency of the filter set at 20 kHz.   
+
+
+6. A multirate technique is used to handle the interference in the last
+problem.  The original analog signal (with interference) is digitized at a
+sampling rate of 176 kHz.  A low-pass digital filter then removes all
+digital  frequencies above 0.18 with less than a 0.02% residue, while
+passing all  frequencies below 0.12 with less than a 0.02% passband ripple
+(an easy task  for a digital filter).  The digital signal is then resampled
+at 44 kHz, that is, every three out of four samples are discarded.  
+
+a. Sketch and label the frequency spectrum of the digital signal before 
+filtering, showing: the audio frequency band, the interfering signal, and
+the approximate frequency response of the digital filter.
+b. Has aliasing occurred during the sampling? Explain.  
+c. In a fair comparison, should this digital filter be compared against the 
+analog Butterworth filter, or the analog Chebyshev filter? Explain.   
+d. How much better is the digital filter performing compared to the analog 
+filter you indicated in (c)?  (It can be difficult to compare analog and
+digital filters; make some sort of quantitative comparison, and explain your
+method).  
+e. Sketch and label the frequency spectrum of the digital signal after 
+resampling, showing: the audio frequency band, and any interfering signals. 
+
+
+7. On television, rotating objects such as wagon wheels and airplane
+propellers often appear to be moving very slowly or even backwards.  This is
+a result of aliasing, caused by the sampling rate of the video (30 frames
+per second) being less than twice the frequency of the rotational motion. To
+understand this, imagine we paint one of the blades of an airplane propeller
+so that we can identify it from the other blades.  We will then turn the
+propeller at 33 rotations per second, in a clockwise direction. In frame
+number 1 of our video sequence, the marked blade happens to be exactly at
+the top of the propeller.   
+
+a. How many rotations does the marked blade make between two successive
+frames?  
+b. Draw a sketch of how the propeller would appear in frames 1, 2, 3 and 4.
+c. How many frames does it take for the marked blade to again appear at the
+top?  
+d. What rotational frequency is (c) in rotations per second?   
+e. Is this apparent rotation clockwise or counterclockwise? 
+f. Explain using Fig. 3-4 how the marked blade's actual frequency, the frame
+rate, and the marked blade's observed frequency are related.   
+g. Repeat (a) to (f) when the propeller is turning at 57 rotations per
+second.
+
+
+8. When viewed on television at 30 frames per second, what is the apparent
+rotational rate of a 4 blade propeller, turning at 44.7 rotations per
+second, if all the blades are identical?  Is the apparent rotation clockwise
+or counterclockwise?  
+44.7 * 4 = 178.8 times per second the image will look the same.
+178.8 / 30 = 5.96 frames to look the same
+
+Example cuz I get confused real easy:
+if propeller rate == 1 Hz, and sample rate == 4Hz
+1 * 4 = 4 times per second image looks the same
+4 times / 4 Hz sampling = 1 frame to look the same
+
+if propeller rate == 2 Hz, and sample rate == 4Hz
+2 * 4 = 4 times per second image looks the same
+8 times / 4 Hz sampling = 2 frames to look the same
+
