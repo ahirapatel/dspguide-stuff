@@ -4,15 +4,59 @@ CHAPTER 3: ADC AND DAC
 following signals.  Choose from: 6 bits, 8 bits, 10 bits, 12 bits, 14 bits, 
 or 16 bits. 
 
+2**6 = 64
+2**8 = 256
+2**10 = 1024
+2**12 = 4096
+2**14 = 16384
+2**16 = 65536
+
 a. A signal where the maximum amplitude is 1 volt and the rms noise is 1.5
 millivolts.  
-b. A signal with a signal-to-noise ratio of 900 to 1. 
+
+# Make sure noise is low compared to LSB
+
+## How much each lsb is for max voltage of 1V (column 1),
+## and how much noise is 1.5mv related to LSB (column 2),
+## and how much the total noise is via adding in quadrature (sqrt(x^2+.29^2))
+### 6 bits 15.625mV LSB           , .096 LSB   , 0.3054766766874355
+### 8 bits 3.90625mV LSB          , .0384 LSB  , 0.481202660009273
+### 10 bits 0.9765625mV LSB       , 1.536 LSB  , 1.5631365903208843
+### 12 bits 0.244140625mV LSB     , 6.144 LSB  , 6.150840267800815
+### 14 bits 0.06103515625mV LSB   , 24.576 LSB , 24.577710959322474
+### 16 bits 0.0152587890625mV LSB , 98.304 LSB , 98.3044277537894 LSB
+16 bits
+
+b. A signal with a signal-to-noise ratio of 900 to 1.
+You want enough bits to represent atleast 900 separate values.
+You want quantization and noise added together to not dominate signal.
+Josh says 12 bits.
+
+
 c. A signal with a coefficient-of-variation of 0.4%. 
+10 bits
+
+
 d. A high-fidelity audio system (hint: a jack-hammer is about 50,000 times
-louder than a pin drop). 
+louder than a pin drop).
+# units in pin drops
+## Just assume max amplitude is 50,000, and pin drop is noise of 1
+## How much each lsb is for max voltage of 1V (column 1),
+## and how much noise is 1.5mv related to LSB (column 2),
+## and how much the total noise is via adding in quadrature (sqrt(x^2+.29^2))
+### 6 bits  781.25 pin drops LSB, .00128 LSB , 0.29000282481382833
+### 8 bits  195.31 pin drops LSB, .00512 LSB , 0.2900451937198753
+### 10 bits 48.83 pin drops LSB , .02048 LSB , 0.29072225645794647
+### 12 bits 12.21 pin drops LSB , .08192 LSB , 0.3013484468186289
+### 14 bits 3.05 pin drops LSB  , .32768 LSB , 0.4375776301412128
+### 16 bits .76 pin drops LSB   , 1.31072 LSB, 1.3424183097678608
+16 bits, it can see the noise actually
+
 e. A black and white digital image (hint: under the best conditions, the 
 human eye can differentiate about 200 shades of gray between pure black and 
-pure white). 
+pure white).
+### 8 bits because we need atleast 200 values, but 8 bits can fit 256
+### Does this account for quantization noise enough?
 
 
 2. A scientist evaluates two different digital thermometers.  Each has a 
@@ -23,19 +67,43 @@ three to four adjacent readings (i.e., +/- 2 degrees).  For the questions
 below, assume that the temperature is held constant.  
 
 a. What is the largest possible error in an individual reading from A? 
+## +/- .5 degrees
+
 b. What is the largest possible error in an individual reading from B?
+## Assuming +/- 2 degrees in question refers to difference in each adjacent
+## reading and not total difference
+## It reads to nearest whole degree, so error in measuring is .5 degree
+## Error in actually measuring is about 2 degrees
+## +/- 2.5 degrees
+
 c. In a single reading, which provides the "best" information?  Explain.   
+## thermometer A, as the temperature of the liquid stays constant and it does
+## not change.
+
 d. If 1000 readings are taken with A, what is the standard deviation? 
+## 0
+
 e. If 1000 readings are taken with B, what is the approximate standard
 deviation? (choose from 0.1, 0.5, 2.0 and 4.0).  
+# 2.0?
+
 f. If 1000 readings are taken with thermometer B, what is the "typical error
 between the mean of the readings, and the mean of the underlying process?  
+# use the formular:
+## Typical error = standard_deviation / Num_samples^.5
+
 g. If 1000 readings are taken with each thermometer, which data set provides
 the "best" information? Explain.  
+## Thermometer B probably, the dither effect could be used to get some extra
+## precision between degrees, eg 500 samples of 5 degrees, and 500 of 6 degrees
+## could actually indicate 5.5 degrees. 
+
 h. How many readings must be taken with thermometer A to reliably detect a
 temperature change of 0.15 degrees?  (choose from 10, 100, 1000, 1 million,
 1 billion, or "it cannot be done").  Explain.  
 i. Repeat (h) for thermometer B.  
+## I'd think in this scenario provided it cannot be done for thermometer A
+## For thermometer b, I am unsure
 
 
 3. An engineer designs a microprocessor controlled ADC board that can 
@@ -47,6 +115,13 @@ entering the ADC chip. He then smiles, and plans how to spend the extra
 money. In detail, explain what the engineer was looking for in the noise
 measurement, and how he can make the modification.  
 
+## 100 milliseconds == 100000 microseconds
+## so 8 bit with 10 microseconds VS 12 bit with 100000 microseconds
+## The dude saw there was enough noise to use a dithering and average like effect.
+## He could just increase the step sizes of the 8 bit samples to have a total range
+## equal to the 12 bit sample, then he could get a series of samples every 10 microseconds
+## until he reaches a 100,000 microsecond period and average the values. In summation,
+## dithering.
 
 4. An analog electronic signal is composed of three sine waves: 1 kHz @ 1 
 volt amplitude, 3 kHz @ 2 volts amplitude, and 4 kHz @ 5 volts amplitude
@@ -87,7 +162,7 @@ interference?
 
 c. What is the effect of the filter on the audio information?
 
-# Not much. Sound is frequency encoded so butterworth shouldn't impact
+# Not much. Dude says in book sound is frequency encoded so butterworth shouldn't impact
 # the audible characteristics much and since the data is from 20 Hz to 20 kHz,
 # the data should not be attentuated by the filter too much.
 
@@ -99,7 +174,7 @@ the audio frequency band, and the interfering signal.
 e. At what frequency does the aliased interference appear in the digitized 
 signal?  
 
-# it would be at 12 kHz?
+# it would be at 12 kHz
 
 f. If an 8 pole Chebyshev filter (6% ripple) were used instead, how would
 the amplitude of the aliased interference change?  
@@ -122,13 +197,17 @@ at 44 kHz, that is, every three out of four samples are discarded.
 a. Sketch and label the frequency spectrum of the digital signal before 
 filtering, showing: the audio frequency band, the interfering signal, and
 the approximate frequency response of the digital filter.
+
 b. Has aliasing occurred during the sampling? Explain.  
+
 c. In a fair comparison, should this digital filter be compared against the 
 analog Butterworth filter, or the analog Chebyshev filter? Explain.   
+
 d. How much better is the digital filter performing compared to the analog 
 filter you indicated in (c)?  (It can be difficult to compare analog and
 digital filters; make some sort of quantitative comparison, and explain your
 method).  
+
 e. Sketch and label the frequency spectrum of the digital signal after 
 resampling, showing: the audio frequency band, and any interfering signals. 
 
@@ -145,13 +224,31 @@ the top of the propeller.
 
 a. How many rotations does the marked blade make between two successive
 frames?  
+# 30 fps
+# 33 rps 
+## 33 rps / 30 fps = 1.1 rpf
+
 b. Draw a sketch of how the propeller would appear in frames 1, 2, 3 and 4.
+
+
+
 c. How many frames does it take for the marked blade to again appear at the
-top?  
+top? 
+# 1.1 rpf => next whole number multiple is 11, so 11/1.1 = 10 frames per full rotation
+
 d. What rotational frequency is (c) in rotations per second?   
+10 frames per full rotation, 30 frames per second = 30 / 10 = 3 rps
+
 e. Is this apparent rotation clockwise or counterclockwise? 
+# 1.1 rpf - 1 => .1 digital frequency, therefore clockwise cuz phase is same
+# clockwise
+
 f. Explain using Fig. 3-4 how the marked blade's actual frequency, the frame
 rate, and the marked blade's observed frequency are related.   
+# fps = sampling rate
+# observed frequency = .1 digital freq
+# actual frequency = 1.1 analog freq in diagram
+
 g. Repeat (a) to (f) when the propeller is turning at 57 rotations per
 second.
 
@@ -160,8 +257,17 @@ second.
 rotational rate of a 4 blade propeller, turning at 44.7 rotations per
 second, if all the blades are identical?  Is the apparent rotation clockwise
 or counterclockwise?  
+
 44.7 * 4 = 178.8 times per second the image will look the same.
 178.8 / 30 = 5.96 frames to look the same
+5.96 => .96, this indicates phase shift
+1-.96 = .04 digital frequency
+
+apparent rotational rate:
+.04 * sampling rate = .04 * 30 = 1.2  ?
+.04 ^ -1 = 25 ?
+
+Therefore, it is counterclockwise if it was clockwise originally.
 
 Example cuz I get confused real easy:
 if propeller rate == 1 Hz, and sample rate == 4Hz
