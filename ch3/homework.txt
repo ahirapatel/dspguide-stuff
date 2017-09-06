@@ -65,6 +65,8 @@ d. Sampling rate = 5.5 kHz.
 e. Sampling rate = 5 kHz.
 f. Sampling rate = 1.7 kHz.
 
+# see paper
+
 
 5. A high-fidelity audio signal (containing frequencies between 20 Hz and 20
 kHz) is contaminated with interference from a nearby switching power supply,
@@ -83,14 +85,30 @@ interference?
 
 # See paper
 
-c. What is the effect of the filter on the audio information?   
+c. What is the effect of the filter on the audio information?
+
+# Not much. Sound is frequency encoded so butterworth shouldn't impact
+# the audible characteristics much and since the data is from 20 Hz to 20 kHz,
+# the data should not be attentuated by the filter too much.
+
 d. Sketch and label the frequency spectrum of the digital signal, showing: 
 the audio frequency band, and the interfering signal.  
+
+# See paper
+
 e. At what frequency does the aliased interference appear in the digitized 
 signal?  
+
+# it would be at 12 kHz?
+
 f. If an 8 pole Chebyshev filter (6% ripple) were used instead, how would
 the amplitude of the aliased interference change?  
+
+# see paper
+
 g. Repeat (a)-(f) with the cutoff frequency of the filter set at 20 kHz.   
+
+# see paper
 
 
 6. A multirate technique is used to handle the interference in the last
