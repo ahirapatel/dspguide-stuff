@@ -1,0 +1,26 @@
+
+impulse train:
+	https://en.wikipedia.org/wiki/Dirac_comb
+	https://en.wikipedia.org/wiki/Zero-order_hold
+
+data acquistion/error/processing:
+	https://en.wikipedia.org/wiki/Sample_and_hold
+	https://en.wikipedia.org/wiki/Sampling_(signal_processing)
+	https://en.wikipedia.org/wiki/Quantization_(signal_processing)
+	https://en.wikipedia.org/wiki/Ringing_artifacts
+
+
+some not covered from this chapter, I thought it was neat to look at
+filters applied to images:
+	https://homepages.inf.ed.ac.uk/rbf/HIPR2/freqfilt.htm
+
+Filters:
+	https://en.wikipedia.org/wiki/Elliptic_filter
+	https://en.wikipedia.org/wiki/Butterworth_filter
+	https://en.wikipedia.org/wiki/Chebyshev_filter
+	https://en.wikipedia.org/wiki/Bessel_filter
+Some neato keen interactive filter widgets (like the piano through filters is neat):
+	http://www.falstad.com/dfilter/
+
+Some basic info about filters (probably more videos in the series):
+	https://www.youtube.com/watch?v=j0K4yboux7gO
