@@ -205,8 +205,9 @@ def step_decomposition(x):
     steps = []
     N = len(x)
     for n in range(len(x)):
-        current_sample = x[n]
-        steps.append(([0] * n) + ([current_sample] * (N-n)))
+        # step[0] = x[0], the rest are difference based
+        current_sample_value = x[n] - x[n-1] if n > 0 else x[n]
+        steps.append(([0] * n) + ([current_sample_value] * (N-n)))
     return steps
 
 steps = step_decomposition(signal)
