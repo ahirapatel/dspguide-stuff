@@ -191,6 +191,7 @@ def even_odd_decomposition(x):
     for n in range(len(signal)):
         even.append((x[n] + x[N-n])/2)
         odd.append((x[n] - x[N-n])/2)
+    odd[0] = 0 # Definition explicitly says odd[0] = 0
     return even, odd
 
 
