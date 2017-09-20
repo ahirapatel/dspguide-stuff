@@ -171,3 +171,103 @@ f = [1 if n < -3 else (0 if 0 < n and n < 4 else 5) for n in ns]
 matplotlib.pyplot.title('1 if t < -3, 0 if 0 < t < 4, 5 otherwise')
 matplotlib.pyplot.plot(f, marker='.')
 matplotlib.pyplot.show()
+
+"""
+4. Samples 0 to 11 of a signal have the value: 0, 2, 3, 4, 3, 2,-1, 0, -2,
+-3, 2, 1.   Calculate, sketch and label:
+    a. The even and odd parts.
+    b. The interlaced decomposition.
+    c. The step decomposition.
+"""
+signal = [0, 2, 3, 4, 3, 2,-1, 0, -2, -3, 2, 1]
+matplotlib.pyplot.title("Original signal")
+matplotlib.pyplot.plot(signal)
+matplotlib.pyplot.show()
+
+def even_odd_decomposition(x):
+    even = []
+    odd = []
+    N = len(signal) - 1
+    for n in range(len(signal)):
+        even.append((x[n] + x[N-n])/2)
+        odd.append((x[n] - x[N-n])/2)
+    return even, odd
+
+
+even, odd = even_odd_decomposition(signal)
+matplotlib.pyplot.title("Even / Odd signals")
+matplotlib.pyplot.plot(even)
+matplotlib.pyplot.plot(odd)
+matplotlib.pyplot.show()
+
+def step_decomposition(x):
+    steps = []
+    N = len(x)
+    for n in range(len(x)):
+        current_sample = x[n]
+        steps.append(([0] * n) + ([current_sample] * (N-n)))
+    return steps
+
+steps = step_decomposition(signal)
+matplotlib.pyplot.title("step decomposition")
+for step in steps:
+    matplotlib.pyplot.plot(step)
+matplotlib.pyplot.plot(signal)
+matplotlib.pyplot.show()
+
+"""
+5. Two continuous waveforms, b(t) and x(t) are defined by: 
+
+b(t) =  1 for 0 < t < 2
+        0 otherwise
+
+x(t) = -1 for 1 < t < 2
+        1 for 2 < t < 3
+        4 for 3 < t < 4
+        2 for 4 < t < 5
+        0 otherwise
+
+    a. Sketch b(t) and x(t)
+    b. Show that x(t) can be decomposed into three scaled and shifted versions of
+    b(t).  That is, find: a1, a2, a3, s1, s2, s3, such that: x(t) = a1 b(t-s1) +
+    a2 b(t-s2) + a3 b(t-s3)
+    c. Sketch these three component signals.
+"""
+
+from numpy import arange
+def B(t):
+    if 0 < t <= 2: return 1
+    else: return 0
+
+def X(t):
+    if 1 < t <= 2: return -1
+    elif 2 < t <= 3: return 1
+    elif 3 < t <= 4: return 4
+    elif 4 < t <= 5: return 2
+    else: return 0
+B_values = [B(t) for t in arange(0,5,.1)]
+X_values = [X(t) for t in arange(0,5,.1)]
+
+matplotlib.pyplot.title("original signal")
+matplotlib.pyplot.plot(X_values, 'r')
+matplotlib.pyplot.show()
+
+# I should've really made a class instead of manually doing this :|
+"""
+x(t) = -1*b(t-1) + 2*b(t-2) + 2*b(t-3)
+"""
+term1 = [-1 * B(t) for t in arange(0,5,.1)]
+term1 = ([0] * 10) + term1[:-10]             # Pad and remove excess elements since we don't have a matching time array
+term2 = [2 * B(t) for t in arange(0,5,.1)]
+term2 = ([0] * 20) + term2[:-20]
+term3 = [2 * B(t) for t in arange(0,5,.1)]
+term3 = ([0] * 30) + term3[:-30]
+totals = [a+b+c for a,b,c in zip(term1,term2,term3)]
+matplotlib.pyplot.title("composed signal")
+matplotlib.pyplot.plot(term1)
+matplotlib.pyplot.plot(term2)
+matplotlib.pyplot.plot(term3)
+matplotlib.pyplot.plot(totals, 'r')
+matplotlib.pyplot.show()
+
+
