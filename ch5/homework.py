@@ -201,6 +201,23 @@ matplotlib.pyplot.plot(even)
 matplotlib.pyplot.plot(odd)
 matplotlib.pyplot.show()
 
+def interlaced_decomposition(x):
+    even = [0] * len(x)
+    odd = [0] * len(x)
+    for i in range(0,len(x),2): # Even samples
+        even[i] = x[i]
+    for i in range(1,len(x),2): # odd samples
+        odd[i] = x[i]
+    return even, odd
+
+even, odd = interlaced_decomposition(signal)
+
+matplotlib.pyplot.title("Interlaced decomposition")
+matplotlib.pyplot.plot(signal)
+matplotlib.pyplot.plot(even)
+matplotlib.pyplot.plot(odd)
+matplotlib.pyplot.show()
+
 def step_decomposition(x):
     steps = []
     N = len(x)
