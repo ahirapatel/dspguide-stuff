@@ -270,4 +270,29 @@ matplotlib.pyplot.plot(term3)
 matplotlib.pyplot.plot(totals, 'r')
 matplotlib.pyplot.show()
 
+"""
+6. Systems are proven to be linear by mathematically showing that they obey
+the properties of additivity and homogeneity.  However, systems in the real
+world are often only understood by empirical measurements.  That is, a
+scientist or engineer places a test signal into the input, and looks at what
+comes out. 
+        
+a. Is it possible to prove that a system is linear based on measurements of
+the input and output alone, without knowing the formal mathematical 
+relationship between the input and output?  Explain.  
 
+b. Is if possible to prove that a system is nonlinear in this way? Explain.
+
+To help you answer these questions, think about an electronics technician
+testing a "black box" for being linear.  He does this by placing signals
+into the input and observing the output.  However, the technician has
+absolutely no information about what is "inside" the system.  For instance,
+it might contain an evil demon trying to deceive the technician.  Or in
+another case, it might contain a timer that scrambles the output once every
+ten million years of operation. 
+"""
+
+# a. It is possible to have high confidence in a system being linear based on measurements.
+
+# b. It is possible, but may not be readily apparently (eg in the case of a timer that
+#    scrambles the output once every ten million years of operation.
