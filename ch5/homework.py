@@ -127,6 +127,9 @@ matplotlib.pyplot.show()
     d. x[n] = cos(2 pi n / 2)
     e. x[n] = n-3 if n > 2, 0 otherwise
     f. x[n] = 1 if n < -3, 0 if 0 < n < 4, 5 otherwise
+# Point of this was to see aliasing
+# using whole number n as sampling times
+# I just sampled a boat load for the continuous part below.
 
 3. Sketch the following continuous signals for -8 < t < 8: 
 
@@ -192,6 +195,7 @@ def even_odd_decomposition(x):
         even.append((x[n] + x[N-n])/2)
         odd.append((x[n] - x[N-n])/2)
     odd[0] = 0 # Definition explicitly says odd[0] = 0
+    even[0] = x[0] # Definition explicitly says even[0] = x[0]
     return even, odd
 
 
