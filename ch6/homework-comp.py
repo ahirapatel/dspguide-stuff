@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import matplotlib.pyplot
+from math import sin, cos, pi
 
 """
 CHAPTER 6: CONVOLUTION
@@ -37,7 +38,6 @@ for i = 0 to 98
 next i
 """
 def make_kernel():
-    from math import sin, cos
     h = [0] * 99
     for i in range(0,99):
         h[i] = 0.31752 * sin(0.314159 * (i-49.00001)) / (i-49.00001)
@@ -74,6 +74,12 @@ and make 6 complete cycles in the 500 samples.  The second sinusoid will
 have an amplitude of 0.5 and make 44 complete cycles in the 500 samples. 
 Make of plot of this signal.  
 """
+sin1 = [sin(2*pi*n/500*6) for n in range(500)]
+sin2 = [.5*sin(2*pi*n/500*44) for n in range(500)]
+added_sins = [a+b for a,b in zip(sin1,sin2)]
+matplotlib.pyplot.plot(added_sins)
+matplotlib.pyplot.title(".5*sin(2*pi*n/500*44) + sin(2*pi*n/500*6)")
+matplotlib.pyplot.show()
 
 
 """
@@ -81,10 +87,24 @@ Make of plot of this signal.
 with the filter kernel you created in 2. Plot this signal. Has the filter
 passed the lower frequency signal, while blocking the higher frequency
 signal?  Comment on its effectiveness.  
+"""
+matplotlib.pyplot.plot(convolve(added_sins, lpws_filter))
+matplotlib.pyplot.title(".5*sin(2*pi*n/500*44) + sin(2*pi*n/500*6) LP FILTERED :o")
+matplotlib.pyplot.show()
+# Jeez, that thing looks pristine. DSP is black magic sorcery. The lower frequency
+# passed while barely passing through the higher frequency. The first and last 50
+# or so samples are useless looking though. I would've expected it to be the first
+# and last 99 or so samples that looked a bit off, due to the not fully immersed kernel.
 
 
+"""
 6. Turn the filter kernel into a high-pass filter by changing the sign of
 all the samples, and then adding one to sample 49  (you can look ahead to
 Fig. 14-5 if you want more information on this procedure). Test this
 high-pass filter in the same way as step 4.
 """
+hp_filter = [-val for val in lpws_filter]
+hp_filter[49] += 1
+matplotlib.pyplot.plot(convolve(added_sins, hp_filter))
+matplotlib.pyplot.title(".5*sin(2*pi*n/500*44) + sin(2*pi*n/500*6) HP FILTERED :O")
+matplotlib.pyplot.show()
