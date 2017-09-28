@@ -143,6 +143,8 @@ matplotlib.pyplot.plot(output_padded, marker='x')
 matplotlib.pyplot.title("#1d padded input and convolution output and padded input signal convolution output")
 matplotlib.pyplot.show()
 
+#d. M zeroes
+
 
 
 """
@@ -382,7 +384,7 @@ print("pre-7 example convolution of {} {} = {}", x, h, convolve(x, h)) # and the
 
 #c. h[n] = delta[n-2], x[n] = delta[n-1] + delta[n+4]
 #c. y[n] = delta[n-2] * delta[n-1] + delta[n-2] * delta[n+4]
-#          delta[n-3] + delta[n+3]
+#          delta[n-3] + delta[n+2]
 
 #d. h[n] = delta[n-1] + delta[n+1], x[n] = delta[n-a] + delta[n+b]
 #d. y[n] = delta[n-1] * delta[n-a] + delta[n-1] * delta[n+b] + delta[n+1] * delta[n-a] + delta[n+1] * delta[n+b]
@@ -436,7 +438,7 @@ x[n]*h[n] must be zero over the interval, E <= n <= F.  Express the variables,
 E and F, in terms of: A, B, C, and D.  
 """
 # E = A-C, F = B+D
-
+# SO ?
 
 """
 10. Two signals, a[n] and b[n], each contain 6 points, as defined below. 
