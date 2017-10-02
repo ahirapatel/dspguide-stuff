@@ -213,11 +213,23 @@ account for these echoes of echoes?
 
 # b. How many samples does this correspond to in the digital signal?
 #    44 kHZ == 44000 Hz == 44000 samples/second
-#    440000 samples / second * 0.018072289156626505 seconds
+#    44000 samples / second * 0.018072289156626505 seconds
 #    795.1807228915662 samples => 795 (probably miss that data of .1807228915662 samples)
 
 # c. What is the impulse response of a digital system simulating this echo, if
 # the amplitude of the echo is 20%?
 #    .2 * delta[n-795] ?
 
+# d. Repeat (a) to (c) for the large room.
+#    a. 10 + 10 = 20 meters, 20 * (1/332) = 0.060240963855421686 seconds
+#    b. 44000 * 0.060240963855421686 = 2650.602409638554 => 2650
+#    c. .2 * delta[n-2650]
 
+# e. In a real listening environment, each echo will also generate another
+# echo.  That is, each original sound will be heard over and over with
+# diminishing amplitude. How would the impulse response in (c) be modified to
+# account for these echoes of echoes?
+# Have some impulses in parallel with each previous output of the echo generator.
+# .2 * delta[n-time] would feed into another .2 * delta[n-time], etc.
+# Could the echo generator feed into itself? Eg (original signal + echo generator out)
+# feeding into the echo generator
