@@ -52,9 +52,9 @@ phase, or nonlinear phase.
 # d. x[n] = delta[n] -  5 delta[n-5]
 # non-linear phase
 # e. x[n] = delta[n] + delta[n+5]
-# non-linear phase
+# linear phase
 # f. x[n] = delta[n-1] - delta[n-4] + delta[n-7]
-# non-linear phase
+# linear phase
 # g. x[n] = exp(-n)
 # non-linear phase
 # h. x[n] = exp(-abs(n))  (where "abs" is the absolute value function)
