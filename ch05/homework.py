@@ -190,8 +190,8 @@ matplotlib.pyplot.show()
 def even_odd_decomposition(x):
     even = []
     odd = []
-    N = len(signal) - 1
-    for n in range(len(signal)):
+    N = len(x) - 1
+    for n in range(len(x)):
         even.append((x[n] + x[N-n])/2)
         odd.append((x[n] - x[N-n])/2)
     odd[0] = 0 # Definition explicitly says odd[0] = 0
