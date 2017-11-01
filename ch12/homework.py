@@ -37,6 +37,13 @@ odd parts.
 b. What would be the spectrum if the values in imx[n] were set to zero?
 e. What would be the spectrum if the values in rex[n] were set to zero?
 """
+# TODO: OOPS I MISREAD. The values are the spectrum, not the time domain siggy
+# TODO: OOPS I MISREAD. The values are the spectrum, not the time domain siggy
+# TODO: OOPS I MISREAD. The values are the spectrum, not the time domain siggy
+# TODO: OOPS I MISREAD. The values are the spectrum, not the time domain siggy
+# TODO: OOPS I MISREAD. The values are the spectrum, not the time domain siggy
+# TODO: OOPS I MISREAD. The values are the spectrum, not the time domain siggy
+# TODO: OOPS I MISREAD. The values are the spectrum, not the time domain siggy
 from numpy import absolute
 import matplotlib.pyplot
 real = [1, 2,-1,-2, 1, 0, 2, 3]
