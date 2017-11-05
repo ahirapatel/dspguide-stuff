@@ -37,19 +37,11 @@ odd parts.
 b. What would be the spectrum if the values in imx[n] were set to zero?
 e. What would be the spectrum if the values in rex[n] were set to zero?
 """
-# TODO: OOPS I MISREAD. The values are the spectrum, not the time domain siggy
-# TODO: OOPS I MISREAD. The values are the spectrum, not the time domain siggy
-# TODO: OOPS I MISREAD. The values are the spectrum, not the time domain siggy
-# TODO: OOPS I MISREAD. The values are the spectrum, not the time domain siggy
-# TODO: OOPS I MISREAD. The values are the spectrum, not the time domain siggy
-# TODO: OOPS I MISREAD. The values are the spectrum, not the time domain siggy
-# TODO: OOPS I MISREAD. The values are the spectrum, not the time domain siggy
 from numpy import absolute
 import matplotlib.pyplot
 real = [1, 2,-1,-2, 1, 0, 2, 3]
 imag = [3, 2, 4, 5,-1,-2, 1, 1]
-# a. Why? I am confused about a. Do I do even/odd decomposition or just
-#    every other sample? What does this even show?
+# a.
 def even_odd_decomposition(x):
     even = []
     odd = []
@@ -61,16 +53,29 @@ def even_odd_decomposition(x):
     even[0] = x[0] # Definition explicitly says even[0] = x[0]
     return even, odd
 
-data = [complex(r,i) for r,i in zip(real, imag)]
-matplotlib.pyplot.plot(absolute(numpy.fft.fft(data)))
+data = [complex(r,i) for r,i in zip(real,imag)]
+even, odd = even_odd_decomposition(real)
+matplotlib.pyplot.plot(absolute(even))
+matplotlib.pyplot.plot(absolute(odd))
+matplotlib.pyplot.show()
+
+even_r, odd_r = even_odd_decomposition(real)
+even_i, odd_i = even_odd_decomposition(imag)
+matplotlib.pyplot.plot(even_r)
+matplotlib.pyplot.show()
+matplotlib.pyplot.plot(even_i)
+matplotlib.pyplot.show()
+matplotlib.pyplot.plot(odd_r)
+matplotlib.pyplot.show()
+matplotlib.pyplot.plot(odd_i)
 matplotlib.pyplot.show()
 # b.
 data = [complex(r,0) for r in real]
-matplotlib.pyplot.plot(absolute(numpy.fft.fft(data)))
+matplotlib.pyplot.plot(absolute(data))
 matplotlib.pyplot.show()
 # c.
 data = [complex(0,i) for i in imag]
-matplotlib.pyplot.plot(absolute(numpy.fft.fft(data)))
+matplotlib.pyplot.plot(absolute(data))
 matplotlib.pyplot.show()
 
 
